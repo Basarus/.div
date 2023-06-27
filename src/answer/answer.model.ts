@@ -14,8 +14,8 @@ export class Answer extends Model<Answer, IAnswerCreationAttrbs>{
     id: number;
     @ForeignKey(() => User)
     @ApiProperty({ example: '1', description: 'id пользователя' })
-    @Column({ type: DataType.STRING, allowNull: false })
-    userId: string;
+    @Column({ type: DataType.INTEGER })
+    userId: number;
     @ApiProperty({ example: 'Active', description: 'Статус ответа' })
     @Column({ type: DataType.STRING, defaultValue: 'Active', allowNull: false })
     status: string;
