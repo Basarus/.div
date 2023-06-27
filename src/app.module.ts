@@ -32,4 +32,4 @@ import { Answer } from "./answer/answer.model";
     ]
 })
 
-export class RequestModule { }
+export class AppModule { }

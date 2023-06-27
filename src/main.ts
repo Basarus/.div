@@ -1,12 +1,12 @@
 import { NestFactory } from "@nestjs/core";
-import { RequestModule } from "./request.module";
+import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as postmail from "./nodemailer/index";
 import { createTestDatabase } from "./utls";
 
 async function init(){
     const PORT = process.env.PORT || 9000;
-    const app = await NestFactory.create(RequestModule);
+    const app = await NestFactory.create(AppModule);
 
     const config = new DocumentBuilder()
     .setTitle('.div | Тестовое задание Request')
