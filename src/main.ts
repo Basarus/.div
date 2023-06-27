@@ -1,6 +1,8 @@
 import { NestFactory } from "@nestjs/core";
 import { RequestModule } from "./request.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import * as postmail from "./nodemailer/index";
+import { createTestDatabase } from "./utls";
 
 async function init(){
     const PORT = process.env.PORT || 9000;
@@ -15,6 +17,8 @@ async function init(){
      const document = SwaggerModule.createDocument(app, config);
      SwaggerModule.setup('/api/docs', app, document)
 
+     postmail.load()
+     await createTestDatabase()
     await app.listen(PORT, () => {
         console.log(`Сервер запущен, PORT: ${PORT}`)
     })
