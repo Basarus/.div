@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const localUrl = 'http://localhost:3000';
+export const localUrl = 'http://localhost:3000';
 
 const $host = axios.create({
     baseURL: localUrl
@@ -11,7 +11,8 @@ const $authHost = axios.create({
 })
 
 const authIntercepter = config => {
-    config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
+    config.headers.authorization = localStorage.getItem('token')
+    return config
 }
 
 $authHost.interceptors.request.use(authIntercepter)

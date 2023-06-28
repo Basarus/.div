@@ -3,7 +3,7 @@ import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as postmail from "./nodemailer/index";
 import { createTestDatabase } from "./utls";
-// import * as cors from 'cors'
+import * as cors from 'cors'
 
 
 async function init(){
@@ -20,17 +20,16 @@ async function init(){
      SwaggerModule.setup('/api/docs', app, document)
 
      postmail.load()
-     // Для создания базовых данных
+    
      await createTestDatabase()
      
-    // Для фикса запросов с клиента
-    //  const corsOptions = {
-    //     origin:'http://localhost:3001', 
-    //     credentials:true,            //access-control-allow-credentials:true
-    //     optionSuccessStatus:200
-    // }
+     const corsOptions = {
+        origin:'http://localhost:3001', 
+        credentials:true, 
+        optionSuccessStatus:200
+    }
   
-    // app.use(cors(corsOptions))
+    app.use(cors(corsOptions))
 
     await app.listen(PORT, () => {
         console.log(`Сервер запущен, PORT: ${PORT}`)

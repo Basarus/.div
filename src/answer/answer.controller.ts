@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Headers, UnauthorizedException } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Headers, UnauthorizedException, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger/dist';
 import { AnswerService } from './answer.service';
 import { RolesGuard } from 'src/auth/roles.guard';
@@ -43,8 +43,8 @@ export class AnswerController {
     @Roles('Пользователь')
     @UseGuards(RolesGuard)
     @Post('/:id')
-    putQuestion(@Body() dto: CreateReplyDto) {
-        return this.asnwerService.putRequest(dto)
+    putQuestion(@Param('id') id: string, @Body() dto: CreateReplyDto) {
+        return this.asnwerService.putRequest(Number(id), dto)
     }
 
     @ApiOperation({ summary: 'Ответ на email пользователя' })
@@ -52,8 +52,8 @@ export class AnswerController {
     @Roles('Администратор')
     @UseGuards(RolesGuard)
     @Post('/email/:id')
-    replyToEmail(@Body() dto: CreateReplyDto) {
-        return this.asnwerService.replyToEmail(dto)
+    replyToEmail(@Param('id') id: string, @Body() dto: CreateReplyDto) {
+        return this.asnwerService.replyToEmail(Number(id), dto)
     }
 
 }

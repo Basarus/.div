@@ -22,7 +22,7 @@ export class AuthService {
             const candidate = await this.userService.getUserByEmail(userDto.email);
             if (candidate) {
                 throw new HttpException('Пользователь с таким email существует', HttpStatus.BAD_REQUEST);
-            }
+            }   
             const hashPassword = await bcrypt.hash(userDto.password, 5);
             const user = await this.userService.createUser({ ...userDto, password: hashPassword })
             return this.generateToken(user)
@@ -41,7 +41,8 @@ export class AuthService {
     private async generateToken(user: User) {
         const payload = { email: user.email, id: user.id, roles: user.roles }
         return {
-            token: this.jwtService.sign(payload)
+            token: this.jwtService.sign(payload),
+            role: user.roles
         }
     }
 

@@ -20,9 +20,9 @@ export class AnswerService {
         return answers
     }
 
-    async putRequest(dto: CreateReplyDto) {
+    async putRequest(id: number, dto: CreateReplyDto) {
         const answer = await this.answerRepository.findOne({
-            where: { id: dto.id }
+            where: { id }
         })
         if (!answer) throw new HttpException('Сообщения с данным ID не существует', HttpStatus.BAD_REQUEST);
         if (answer.status == 'Resolved') throw new HttpException('Данный вопрос уже имеет ответ', HttpStatus.BAD_REQUEST);
@@ -37,9 +37,9 @@ export class AnswerService {
         return answer
     }
 
-    async replyToEmail(dto: CreateReplyDto) {
+    async replyToEmail(id: number, dto: CreateReplyDto) {
         const answer = await this.answerRepository.findOne({
-            where: { id: dto.id }
+            where: { id }
         })
         const user = await this.userService.getUserById(Number(answer.userId))
         if (!user) throw new HttpException('Пользователь не найден', HttpStatus.BAD_REQUEST);
