@@ -42,7 +42,7 @@ export class AnswerController {
     @ApiResponse({ status: 200 })
     @Roles('Пользователь')
     @UseGuards(RolesGuard)
-    @Post('/reply')
+    @Post('/:id')
     putQuestion(@Body() dto: CreateReplyDto) {
         return this.asnwerService.putRequest(dto)
     }
@@ -51,7 +51,7 @@ export class AnswerController {
     @ApiResponse({ status: 200 })
     @Roles('Администратор')
     @UseGuards(RolesGuard)
-    @Post('/replyEmail')
+    @Post('/email/:id')
     replyToEmail(@Body() dto: CreateReplyDto) {
         return this.asnwerService.replyToEmail(dto)
     }
