@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Authorization from './component/authorization';
+import { registration } from './http/userApi';
 
 function App() {
+  
+  async function test(){
+    console.log(await registration('test', 'tesst@test.ru', '12345'))
+  }
+ 
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Authorization></Authorization>
     </div>
-  );
+  )
 }
 
 export default App;
